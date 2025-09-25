@@ -23,3 +23,4 @@ dependencyResolutionManagement {
 rootProject.name = "XXPermissionsKT"
 include(":app")
 include(":library")
+include(":library-compose")
