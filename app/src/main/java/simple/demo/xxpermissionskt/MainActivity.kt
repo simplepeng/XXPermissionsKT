@@ -39,9 +39,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen() {
     val permissionsState = rememberXXPermissionsState(PermissionLists.getCameraPermission())
-    val buttonText by remember(permissionsState) {
-        mutableStateOf(if (permissionsState.status.isGranted) "Permissions isGranted" else "Request Permissions")
-    }
+    val buttonText = if (permissionsState.status.isGranted) "Permissions isGranted" else "Request Permissions"
 
     Scaffold { paddingValues ->
         FlowColumn(
