@@ -21,7 +21,7 @@ android {
 
 dependencies {
     //
-    implementation("com.android.support:support-fragment:24.2.0")
+//    implementation("com.android.support:support-fragment:24.2.0")
     implementation(libs.device.compat)
-    implementation(libs.xxpermissions)
+    api(libs.xxpermissions)
 }
