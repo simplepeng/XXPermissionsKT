@@ -6,7 +6,8 @@ import androidx.compose.runtime.Stable
 sealed interface PermissionStatus {
     object Granted : PermissionStatus
     data class Denied(
-        val shouldShowRationale: Boolean
+        val shouldShowRationale: Boolean,
+        val isDoNotAskAgain: Boolean,
     ) : PermissionStatus
 }
 
@@ -17,4 +18,10 @@ val PermissionStatus.shouldShowRationale: Boolean
     get() = when (this) {
         PermissionStatus.Granted -> false
         is PermissionStatus.Denied -> shouldShowRationale
+    }
+
+val PermissionStatus.isDoNotAskAgain: Boolean
+    get() = when (this) {
+        PermissionStatus.Granted -> false
+        is PermissionStatus.Denied -> isDoNotAskAgain
     }
