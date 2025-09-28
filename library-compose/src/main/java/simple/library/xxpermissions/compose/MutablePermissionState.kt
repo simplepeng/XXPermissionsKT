@@ -18,7 +18,7 @@ import com.hjq.permissions.permission.base.IPermission
 @Composable
 internal fun rememberMutablePermissionState(
     permission: List<IPermission>,
-    onPermissionResult: (Boolean) -> Unit = {}
+    onPermissionResult: (PermissionStatus) -> Unit = {}
 ): MutablePermissionState {
     val context = LocalContext.current
     val permissionState = remember(permission) {
@@ -36,7 +36,7 @@ internal class MutablePermissionState(
     override val permission: List<IPermission>,
     private val context: Context,
     private val activity: Activity = context.findActivity(),
-    private val onPermissionResult: (Boolean) -> Unit = {}
+    private val onPermissionResult: (PermissionStatus) -> Unit = {}
 ) : PermissionState {
 
     override var status: PermissionStatus by mutableStateOf(getPermissionStatus())
@@ -46,7 +46,7 @@ internal class MutablePermissionState(
             .permissions(permission)
             .request { grantedList, deniedList ->
                 refreshPermissionStatus()
-                onPermissionResult.invoke(getPermissionStatus().isGranted)
+                onPermissionResult.invoke(status)
             }
     }
 

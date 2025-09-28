@@ -46,18 +46,26 @@ class MainActivity : ComponentActivity() {
 fun MainScreen() {
     val context = LocalContext.current
 
-    val permissionsState = rememberXXPermissionsState(
-        PermissionLists.getCameraPermission(),
-        PermissionLists.getReadPhoneStatePermission(),
-    )
-//    val permissionsState = rememberXXPermissionsState(PermissionLists.getWriteExternalStoragePermission())
+//    val permissionsState = rememberXXPermissionsState(
+//        PermissionLists.getCameraPermission(),
+//        PermissionLists.getReadPhoneStatePermission(),
+//    )
+    val permissionsState = rememberXXPermissionsState(PermissionLists.getCameraPermission(), onPermissionResult = { status ->
+        if (status.shouldShowRationale) {
+            context.toast("shouldShowRationale")
+        }
+        if (status.isDoNotAskAgain) {
+            context.toast("isDoNotAskAgain")
+        }
+    })
     val buttonText = if (permissionsState.status.isGranted) "Permissions isGranted" else "Request Permissions"
-    if (permissionsState.status.shouldShowRationale) {
-        context.toast("shouldShowRationale")
-    }
-    if (permissionsState.status.isDoNotAskAgain) {
-        context.toast("isDoNotAskAgain")
-    }
+
+//    if (permissionsState.status.shouldShowRationale) {
+//        context.toast("shouldShowRationale")
+//    }
+//    if (permissionsState.status.isDoNotAskAgain) {
+//        context.toast("isDoNotAskAgain")
+//    }
 
     Scaffold { paddingValues ->
         FlowColumn(

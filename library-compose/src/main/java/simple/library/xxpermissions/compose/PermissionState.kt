@@ -9,7 +9,7 @@ import com.hjq.permissions.permission.base.IPermission
 @Composable
 fun rememberXXPermissionsState(
     vararg permission: IPermission,
-    onPermissionResult: (Boolean) -> Unit = {}
+    onPermissionResult: (PermissionStatus) -> Unit = {}
 ): PermissionState {
     return rememberXXPermissionsState(
         permission = permission,
@@ -21,7 +21,7 @@ fun rememberXXPermissionsState(
 @Composable
 fun rememberXXPermissionsState(
     vararg permission: IPermission,
-    onPermissionResult: (Boolean) -> Unit = {},
+    onPermissionResult: (PermissionStatus) -> Unit = {},
     previewPermissionStatus: PermissionStatus = PermissionStatus.Granted
 ): PermissionState {
     return when {
