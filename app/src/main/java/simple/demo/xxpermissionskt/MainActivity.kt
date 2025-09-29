@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -31,6 +32,7 @@ import simple.library.xxpermissions.compose.isDoNotAskAgain
 import simple.library.xxpermissions.compose.isGranted
 import simple.library.xxpermissions.compose.rememberXXPermissionsState
 import simple.library.xxpermissions.compose.shouldShowRationale
+import simple.library.xxpermissions.request
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,8 +55,10 @@ fun MainScreen() {
 //        PermissionLists.getCameraPermission(),
 //        PermissionLists.getReadPhoneStatePermission(),
 //    )
-    val hasPermission = ContextCompat.checkSelfPermission(context, PermissionLists.getCameraPermission().permissionName)
-    val shouldShowRequestPermissionRationale = ActivityCompat.shouldShowRequestPermissionRationale(context as Activity, PermissionLists.getCameraPermission().permissionName)
+//    val hasPermission = ContextCompat.checkSelfPermission(context, PermissionLists.getCameraPermission().permissionName)
+//    val shouldShowRequestPermissionRationale =
+//        ActivityCompat.shouldShowRequestPermissionRationale(context as Activity, PermissionLists.getCameraPermission().permissionName)
+
     val permissionsState = rememberXXPermissionsState(PermissionLists.getCameraPermission(), onPermissionResult = { status ->
         if (status.shouldShowRationale) {
             context.toast("shouldShowRationale")
@@ -63,7 +67,13 @@ fun MainScreen() {
             context.toast("isDoNotAskAgain")
         }
     })
-    val buttonText = if (permissionsState.status.isGranted) "Permissions isGranted" else "Request Permissions"
+    val buttonText = if (permissionsState.status.isGranted) "Permissions isGranted" else "Request Permissions - Compose"
+
+    var hasRecordAudioPermission by remember {
+        mutableStateOf(XXPermissions.isGrantedPermission(context, PermissionLists.getRecordAudioPermission()))
+    }
+
+    val ktxButtonText = if (hasRecordAudioPermission) "Permissions isGranted" else "Request Permissions - KTX"
 
 //    if (permissionsState.status.shouldShowRationale) {
 //        context.toast("shouldShowRationale")
@@ -74,7 +84,9 @@ fun MainScreen() {
 
     Scaffold { paddingValues ->
         FlowColumn(
-            modifier = Modifier.padding(paddingValues),
+            modifier = Modifier
+                .padding(paddingValues)
+                .padding(10.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             Button(onClick = {
@@ -82,6 +94,22 @@ fun MainScreen() {
             }) {
                 Text(
                     text = buttonText
+                )
+            }
+            Button(onClick = {
+                XXPermissions.with(context)
+                    .permission(PermissionLists.getRecordAudioPermission())
+                    .request(context as Activity, onDontAskAgain = {
+                        context.toast("isDoNotAskAgain")
+                    }, onDenied = {
+                        context.toast("shouldShowRationale")
+                    }, onGranted = {
+//                        hasRecordAudioPermission = XXPermissions.isGrantedPermission(context, PermissionLists.getRecordAudioPermission())
+                        hasRecordAudioPermission = true
+                    })
+            }) {
+                Text(
+                    text = ktxButtonText
                 )
             }
         }
