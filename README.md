@@ -41,7 +41,7 @@ XXPermissions.with(context)
 ## Jetpack Compose
 
 ```kotlin
- implementation("com.github.simplepeng.XXPermissionsKT:library-compose:$version")
+implementation("com.github.simplepeng.XXPermissionsKT:library-compose:$version")
 ```
 
 ```kotlin
