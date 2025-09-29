@@ -107,7 +107,6 @@ fun MainScreen() {
                     }, onDenied = {
                         context.toast("shouldShowRationale")
                     }, onGranted = {
-//                        hasRecordAudioPermission = XXPermissions.isGrantedPermission(context, PermissionLists.getRecordAudioPermission())
                         hasRecordAudioPermission = true
                     })
             }) {
