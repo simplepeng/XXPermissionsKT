@@ -58,4 +58,8 @@ dependencies {
     //
     implementation(project(":library"))
     implementation(project(":library-compose"))
+    //
+//    val version = "1.0.0"
+//    implementation("com.github.simplepeng.XXPermissionsKT:library:$version")
+//    implementation("com.github.simplepeng.XXPermissionsKT:library-compose:$version")
 }
