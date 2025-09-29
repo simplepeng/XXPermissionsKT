@@ -16,8 +16,8 @@ val Context.xxPermissions
 val Fragment.xxPermissions
     get() = XXPermissions.with(this)
 
-//val android.support.v4.app.Fragment.xxPermissions
-//    get() = XXPermissions.with(this)
+val androidx.fragment.app.Fragment.xxPermissions
+    get() = XXPermissions.with(this)
 
 fun XXPermissions.request(
     activity: Activity,

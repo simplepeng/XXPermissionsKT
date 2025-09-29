@@ -53,5 +53,9 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     //
+//    implementation(libs.xxpermissions)
+    implementation("com.github.simplepeng:XXPermissions:26.5")
+    //
+    implementation(project(":library"))
     implementation(project(":library-compose"))
 }

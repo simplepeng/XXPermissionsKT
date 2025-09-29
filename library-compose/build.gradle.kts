@@ -15,7 +15,6 @@ android {
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -32,7 +31,7 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     //
-    api(libs.xxpermissions)
+    implementation(libs.xxpermissions)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
 }
