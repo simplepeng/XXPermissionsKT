@@ -40,6 +40,7 @@ internal class MutablePermissionState(
 ) : PermissionState {
 
     override var status: PermissionStatus by mutableStateOf(getPermissionStatus())
+//    override var status: PermissionStatus by mutableStateOf(getPermissionStatus(), referentialEqualityPolicy())
 
     override fun launchPermissionRequest() {
         XXPermissions.with(context)
@@ -84,6 +85,8 @@ internal fun PermissionLifecycleCheckerEffect(
     val lifecycle = androidx.lifecycle.compose.LocalLifecycleOwner.current.lifecycle
     DisposableEffect(lifecycle, permissionCheckerObserver) {
         lifecycle.addObserver(permissionCheckerObserver)
-        onDispose { lifecycle.removeObserver(permissionCheckerObserver) }
+        onDispose {
+            lifecycle.removeObserver(permissionCheckerObserver)
+        }
     }
 }

@@ -55,9 +55,12 @@ fun MainScreen() {
 //        PermissionLists.getCameraPermission(),
 //        PermissionLists.getReadPhoneStatePermission(),
 //    )
+
 //    val hasPermission = ContextCompat.checkSelfPermission(context, PermissionLists.getCameraPermission().permissionName)
-//    val shouldShowRequestPermissionRationale =
-//        ActivityCompat.shouldShowRequestPermissionRationale(context as Activity, PermissionLists.getCameraPermission().permissionName)
+//    val shouldShowRequestPermissionRationale = ActivityCompat.shouldShowRequestPermissionRationale(
+//        context as Activity,
+//        PermissionLists.getCameraPermission().permissionName
+//    )
 
     val permissionsState = rememberXXPermissionsState(PermissionLists.getCameraPermission(), onPermissionResult = { status ->
         if (status.shouldShowRationale) {
